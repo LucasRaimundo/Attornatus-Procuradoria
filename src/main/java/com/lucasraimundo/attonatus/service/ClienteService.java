@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lucasraimundo.attonatus.domain.Cliente;
 import com.lucasraimundo.attonatus.dto.ClienteDTO;
 import com.lucasraimundo.attonatus.repositories.ClienteRepository;
+import com.lucasraimundo.attonatus.repositories.EnderecoRepository;
 import com.lucasraimundo.attonatus.service.exceptions.DataIntegrityException;
 
 @Service
@@ -18,6 +19,9 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repo;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public List<Cliente> findAll(){
 		return repo.findAll();
@@ -49,7 +53,10 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);
 		} catch(DataIntegrityViolationException e){
-			throw new DataIntegrityException("Não é possivel excluir porque há pedidos relacionadas");
+			throw new DataIntegrityException("Não é possivel excluir porque há clientes relacionadas");
 		}
 	}
+	
+	
+	
 }

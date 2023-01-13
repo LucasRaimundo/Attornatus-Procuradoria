@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,27 +14,26 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Cliente implements Serializable {
+public class State implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private String nasc;
+	private String name;
 	
-	@OneToMany(mappedBy = "cliente")
-	private List<Endereco> enderecos = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "state")
+	private List<Cidade> cities = new ArrayList<>();
 	
-	public Cliente() {
+	public State() {
 		
 	}
 
-	public Cliente(Integer id, String nome, String nasc) {
+	public State(Integer id, String name) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.nasc = nasc;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -43,28 +44,20 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getNasc() {
-		return nasc;
+	public List<Cidade> getCities() {
+		return cities;
 	}
 
-	public void setNasc(String nasc) {
-		this.nasc = nasc;
-	}
-	
-	public List<Endereco> getEndereco() {
-		return enderecos;
-	}
-
-	public void setEndereco(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	public void setCities(List<Cidade> cities) {
+		this.cities = cities;
 	}
 
 	@Override
@@ -80,9 +73,8 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		State other = (State) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

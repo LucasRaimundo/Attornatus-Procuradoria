@@ -53,5 +53,10 @@ public class ClienteResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	
+	
+	
 
 }
