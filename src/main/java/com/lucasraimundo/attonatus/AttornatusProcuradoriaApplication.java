@@ -48,13 +48,15 @@ public class AttornatusProcuradoriaApplication implements CommandLineRunner {
 		Cidade c1 = new Cidade(null, "Uberlandia", s1);
 		Cidade c2 = new Cidade(null, "São Paulo", s2);
 		Cidade c3 = new Cidade(null, "Campinas", s2);
+		Cidade c4 = new Cidade(null, "Sorocaba", s2);
+		
 		
 		s1.getCities().addAll(Arrays.asList(c1));
-		s2.getCities().addAll(Arrays.asList(c2, c3));
+		s2.getCities().addAll(Arrays.asList(c2, c3, c4));
 		
 		
 		stateRepository.saveAll(Arrays.asList(s1, s2));
-		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 		
 		Cliente cli1 = new Cliente(null, "Maria Silva", "27/11/2002");
 		
