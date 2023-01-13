@@ -16,8 +16,7 @@ public class ClienteNewDTO implements Serializable {
 	private String cep;
 	
 	
-	
-	private Integer cityId;
+	private Integer cidadeId;
 	
 	public ClienteNewDTO() {
 		
@@ -79,12 +78,12 @@ public class ClienteNewDTO implements Serializable {
 		this.cep = cep;
 	}
 
-	public Integer getCityId() {
-		return cityId;
+	public Integer getCidadeId() {
+		return cidadeId;
 	}
 
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
+	public void setCidadeId(Integer cityId) {
+		this.cidadeId = cityId;
 	}
 	
 	

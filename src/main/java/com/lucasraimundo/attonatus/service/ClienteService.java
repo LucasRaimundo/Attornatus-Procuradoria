@@ -7,9 +7,13 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.lucasraimundo.attonatus.domain.Cidade;
 import com.lucasraimundo.attonatus.domain.Cliente;
+import com.lucasraimundo.attonatus.domain.Endereco;
 import com.lucasraimundo.attonatus.dto.ClienteDTO;
+import com.lucasraimundo.attonatus.dto.ClienteNewDTO;
 import com.lucasraimundo.attonatus.repositories.ClienteRepository;
 import com.lucasraimundo.attonatus.repositories.EnderecoRepository;
 import com.lucasraimundo.attonatus.service.exceptions.DataIntegrityException;
@@ -57,6 +61,23 @@ public class ClienteService {
 		}
 	}
 	
+	@Transactional
+	public Cliente insert(Cliente obj) {
+		obj.setId(null);
+		obj = repo.save(obj);
+		enderecoRepository.saveAll(obj.getEndereco());
+		return obj;
+	}
+	
+	
+	
+	public Cliente fromDTO(ClienteNewDTO objDto) {
+		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getNasc());
+		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
+		Endereco end = new Endereco(null, objDto.getLogadouro(), objDto.getNumber(), objDto.getComplement(), objDto.getDistrict(), objDto.getCep(), cli, cid);
+		cli.getEndereco().add(end);
+		return cli;
+	}
 	
 	
 }
